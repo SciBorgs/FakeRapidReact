@@ -1,13 +1,36 @@
 package org.sciborgs1155.robot.drive;
 
+import edu.wpi.first.wpilibj.Encoder;
+
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj2.command.Command;
 
 public class RealDrive implements DriveIO {
-     // The motors on the left side of the drive.
-  private final CANSparkMax m_leftLeader = new CANSparkMax(DriveConstants.kLeftMotor1Port);
-  private final CANSparkMax m_leftFollower = new CANSparkMax(DriveConstants.kLeftMotor2Port);
+  //  left and right side motors of drive
+  private final CANSparkMax leftLeader = new CANSparkMax(DriveConstants.kLeftMotor1Port,MotorType.kBrushed);
+  private final CANSparkMax leftFollower = new CANSparkMax(DriveConstants.kLeftMotor2Port,MotorType.kBrushed);
+  private final CANSparkMax rightLeader = new CANSparkMax(DriveConstants.kRightMotor1Port,MotorType.kBrushed);
+  private final CANSparkMax rightFollower = new CANSparkMax(DriveConstants.kRightMotor2Port,MotorType.kBrushed);
 
-  // The motors on the right side of the drive.
-  private final CANSparkMax m_rightLeader = new CANSparkMax(DriveConstants.kRightMotor1Port);
-  private final CANSparkMax m_rightFollower = new CANSparkMax(DriveConstants.kRightMotor2Port);
+  private final DifferentialDrive motorDrive = new DifferentialDrive(leftLeader, rightLeader);
+  
+  private final Encoder leftencoder=new Encoder(DriveConstants.kLeftEncoderPort[0],DriveConstants.kLeftEncoderPort[1],DriveConstants.kLeftEncoderReverse);
+  private final Encoder rightencoder=new Encoder(DriveConstants.kLeftEncoderPort[0],DriveConstants.kLeftEncoderPort[1],DriveConstants.kLeftEncoderReverse);
+
+  
+  @Override
+  public Command arcadeDrive(){
+    return ;
+  }
+  @Override
+  public Command driveDistance(){
+    return ;
+  }
+
 }
+
+
+//First, inspires by https://github.com/wpilibsuite/allwpilib/blob/main/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/rapidreactcommandbot/subsystems/Drive.java

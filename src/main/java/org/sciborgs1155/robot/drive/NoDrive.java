@@ -6,10 +6,10 @@ import edu.wpi.first.wpilibj2.command.Commands;
 public class NoDrive implements DriveIO {
     @Override
     public Command arcadeDrive() {
-        return Commands.run(() -> {});
+        return Commands.run(() -> {}); //basically do nothing
     }
     @Override
     public Command driveDistance() {
-        return Commands.run(() -> {});
+        return Commands.run(() -> {}); //basically do nothing
     }
 }
