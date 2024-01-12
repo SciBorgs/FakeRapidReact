@@ -8,6 +8,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class RealDrive implements DriveIO {
   //  left and right side motors of drive
@@ -16,25 +18,21 @@ public class RealDrive implements DriveIO {
   private final CANSparkMax rightLeader = new CANSparkMax(DriveConstants.kRightMotor1Port,MotorType.kBrushed);
   private final CANSparkMax rightFollower = new CANSparkMax(DriveConstants.kRightMotor2Port,MotorType.kBrushed);
 
-  private final DifferentialDrive motorDrive = new DifferentialDrive(leftLeader, rightLeader);
+  private final DifferentialDrive diffDrive = new DifferentialDrive(leftLeader, rightLeader);
   
   private final RelativeEncoder leftEncoder = leftLeader.getEncoder();
   private final RelativeEncoder rightEncoder = rightLeader.getEncoder();
 
-  leftEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
-  rightEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
-  
+  public RealDrive() {
+    leftEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
+    rightEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
+    
+    //idk if this is actually needed
+    rightLeader.setInverted(true);
 
-  
-  @Override
-  public Command arcadeDrive(){
-    return ;
+    leftFollower.follow(leftLeader);
+    rightFollower.follow(rightLeader, true);
   }
-  @Override
-  public Command driveDistance(){
-    return ;
-  }
-
 }
 
 
