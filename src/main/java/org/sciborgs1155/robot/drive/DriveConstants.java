@@ -7,6 +7,10 @@ import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.math.util.Units;
 
 public class DriveConstants {
+    static final int kp = 0;
+    static final int ki = 0;
+    static final int kd = 0;
+
     static final int kLeftMotor1Port = 0;
     static final int kLeftMotor2Port = 1;
     static final int[] kLeftEncoderPort = {0,1};
