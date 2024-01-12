@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class RealDrive implements DriveIO {
+public class RealDrive extends SubsystemBase implements DriveIO {
   //  left and right side motors of drive
   private final CANSparkMax leftLeader = new CANSparkMax(DriveConstants.kLeftMotor1Port,MotorType.kBrushed);
   private final CANSparkMax leftFollower = new CANSparkMax(DriveConstants.kLeftMotor2Port,MotorType.kBrushed);
@@ -20,18 +20,22 @@ public class RealDrive implements DriveIO {
 
   private final DifferentialDrive diffDrive = new DifferentialDrive(leftLeader, rightLeader);
   
-  private final RelativeEncoder leftEncoder = leftLeader.getEncoder();
-  private final RelativeEncoder rightEncoder = rightLeader.getEncoder();
+  private final Encoder leftEncoder= new Encoder(DriveConstants.kLeftEncoderPort[0], DriveConstants.kLeftEncoderPort[1], DriveConstants.kLeftReversed);
+  private final Encoder rightEncoder= new Encoder(DriveConstants.kLeftEncoderPort[0], DriveConstants.kLeftEncoderPort[1], DriveConstants.kLeftReversed);
 
   public RealDrive() {
-    leftEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
-    rightEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
+    leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
+    rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
     
     //idk if this is actually needed
     rightLeader.setInverted(true);
 
     leftFollower.follow(leftLeader);
     rightFollower.follow(rightLeader, true);
+  }
+
+  public Command driveDistance(double distance, double speed){
+    return runOnce(() -> {leftEncoder.reset(); rightEncoder.reset();});
   }
 }
 
