@@ -4,6 +4,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public interface DriveIO {
 
-    // have methods to set voltage
-    // get current position, etc
+    void setLVoltage(double voltage);
+    void setRVoltage(double voltage);
+    double getLVoltage();
+    double getRVoltage();
+    double getLDistanceTraveled();
+    double getRDistanceTraveled();
 }
