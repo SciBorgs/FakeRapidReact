@@ -1,6 +1,5 @@
 package org.sciborgs1155.robot.drive;
 
-import edu.wpi.first.wpilibj.Encoder;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
@@ -8,7 +7,6 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class RealDrive extends SubsystemBase implements DriveIO {
