@@ -18,4 +18,6 @@ public class DriveConstants {
     public static final double kEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the wheel shafts
         (kWheelDiameterMeters * Math.PI) / (double) kEncoderCPR;
+
+    public static final double kEncoderVelocityConversionFactor = 1; //no clue what this number should be
 }

@@ -20,13 +20,16 @@ public class RealDrive extends SubsystemBase implements DriveIO {
 
   private final DifferentialDrive diffDrive = new DifferentialDrive(leftLeader, rightLeader);
   
-  private final Encoder leftEncoder= new Encoder(DriveConstants.kLeftEncoderPort[0], DriveConstants.kLeftEncoderPort[1], DriveConstants.kLeftReversed);
-  private final Encoder rightEncoder= new Encoder(DriveConstants.kLeftEncoderPort[0], DriveConstants.kLeftEncoderPort[1], DriveConstants.kLeftReversed);
+  private final RelativeEncoder leftEncoder= leftLeader.getEncoder();
+  private final RelativeEncoder rightEncoder= rightLeader.getEncoder();
 
   public RealDrive() {
-    leftEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    rightEncoder.setDistancePerPulse(DriveConstants.kEncoderDistancePerPulse);
-    
+    leftEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
+    rightEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
+
+    leftEncoder.setVelocityConversionFactor(DriveConstants.kEncoderVelocityConversionFactor);
+    leftEncoder.setVelocityConversionFactor(DriveConstants.kEncoderVelocityConversionFactor);
+
     //idk if this is actually needed
     rightLeader.setInverted(true);
 
@@ -35,7 +38,14 @@ public class RealDrive extends SubsystemBase implements DriveIO {
   }
 
   public Command driveDistance(double distance, double speed){
-    return runOnce(() -> {leftEncoder.reset(); rightEncoder.reset();});
+    double leftstart=leftEncoder.getPosition();
+    double rightstart=rightEncoder.getPosition();
+    return run(()->diffDrive.arcadeDrive(speed, 0))
+    .until(()-> Math.max(leftEncoder.getPosition()-leftstart, rightEncoder.getPosition()-rightstart) >= distance)
+    .finallyDo(()-> diffDrive.stopMotor())
+    ;
+    //This code has no PID controller, controlled only with distance and speed. 
+    //That means that if this robot was a fast moving car, it will drive onto the crosswalk and hit an unsuspecting pedistrian. 
   }
 }
 
