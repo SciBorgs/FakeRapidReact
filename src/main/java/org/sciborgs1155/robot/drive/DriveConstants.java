@@ -10,6 +10,12 @@ public class DriveConstants {
     static final int kp = 0;
     static final int ki = 0;
     static final int kd = 0;
+    
+    public static final double kSVolts = 0.05;
+    public static final double kShooterFreeRPS = 5300;
+    public static final double kVVoltSecondsPerRotation =
+        // Should have value 12V at free speed...
+        12.0 / kShooterFreeRPS;
 
     static final int kLeftMotor1Port = 0;
     static final int kLeftMotor2Port = 1;
