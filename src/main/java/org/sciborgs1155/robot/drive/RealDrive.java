@@ -3,6 +3,7 @@ package org.sciborgs1155.robot.drive;
 import edu.wpi.first.wpilibj.Encoder;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
@@ -17,8 +18,8 @@ public class RealDrive implements DriveIO {
 
   private final DifferentialDrive motorDrive = new DifferentialDrive(leftLeader, rightLeader);
   
-  private final Encoder leftencoder=new Encoder(DriveConstants.kLeftEncoderPort[0],DriveConstants.kLeftEncoderPort[1],DriveConstants.kLeftEncoderReverse);
-  private final Encoder rightencoder=new Encoder(DriveConstants.kLeftEncoderPort[0],DriveConstants.kLeftEncoderPort[1],DriveConstants.kLeftEncoderReverse);
+  private final RelativeEncoder leftEncoder = leftLeader.getEncoder();
+  private final RelativeEncoder rightEncoder = rightLeader.getEncoder();
 
   
   @Override

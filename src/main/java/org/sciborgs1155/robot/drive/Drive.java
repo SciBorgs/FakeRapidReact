@@ -7,9 +7,9 @@ import monologue.Logged;
 
 public class Drive extends SubsystemBase implements Logged {
 
-  private final DriveIO drivetype;
-  public Drive(DriveIO driveIOtype){
-    drivetype=driveIOtype;
+  private final DriveIO driver;
+  public Drive(DriveIO driverIO){
+    driver=driverIO;
 
   }
 
