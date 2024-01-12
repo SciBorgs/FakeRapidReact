@@ -13,6 +13,7 @@ import org.sciborgs1155.lib.Fallible;
 import org.sciborgs1155.lib.SparkUtils;
 import org.sciborgs1155.robot.Ports.OI;
 import org.sciborgs1155.robot.commands.Autos;
+import org.sciborgs1155.robot.drive.Drive;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,6 +28,7 @@ public class Robot extends CommandRobot implements Logged, Fallible {
   private final CommandXboxController driver = new CommandXboxController(OI.DRIVER);
 
   // SUBSYSTEMS
+  private final Drive robotdrive = Drive.createFromConfigure(); //creates a Drive robotdrive
 
   // COMMANDS
   @LogBoth Autos autos = new Autos();
