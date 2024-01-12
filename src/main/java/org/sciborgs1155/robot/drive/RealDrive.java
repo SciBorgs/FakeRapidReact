@@ -21,7 +21,10 @@ public class RealDrive implements DriveIO {
   private final RelativeEncoder leftEncoder = leftLeader.getEncoder();
   private final RelativeEncoder rightEncoder = rightLeader.getEncoder();
 
-  rightLeader.setInverted(true);
+  leftEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
+  rightEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
+  
+
   
   @Override
   public Command arcadeDrive(){
