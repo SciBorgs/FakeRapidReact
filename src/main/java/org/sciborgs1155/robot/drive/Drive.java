@@ -15,13 +15,19 @@ public class Drive extends SubsystemBase implements Logged {
   private final DriveIO driver;
   public Drive(DriveIO driverIO){
     driver=driverIO;
+    setDefaultCommand(
+      run()//AAAAHHHHHHHHHHHHHHHHHHHH
+    );
   }
-  public static Drive createFromConfigure() {
+  public static Drive create() {
     return Robot.isReal() ? new Drive(new RealDrive()) : new Drive(new SimDrive()); // see if you are real
   }
 
   public Command driveDistance(double distance,double speed) {
-    return runOnce(()->driver.dr(distance,speed));
+    return runOnce(()->{
+      
+
+    });
   }
 
 }

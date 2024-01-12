@@ -28,7 +28,7 @@ public class Robot extends CommandRobot implements Logged, Fallible {
   private final CommandXboxController driver = new CommandXboxController(OI.DRIVER);
 
   // SUBSYSTEMS
-  private final Drive robotdrive = Drive.createFromConfigure(); //creates a Drive robotdrive
+  private final Drive robotdrive = Drive.create(); //creates a Drive robotdrive
 
   // COMMANDS
   @LogBoth Autos autos = new Autos();
