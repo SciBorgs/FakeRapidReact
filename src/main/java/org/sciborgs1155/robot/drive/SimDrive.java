@@ -23,4 +23,13 @@ public class SimDrive implements DriveIO {
             VecBuilder.fill(0, 0, 0.0001, 0.1, 0.1, 0.005, 0.005));
     }
 
+    @Override
+    public Command driveDistance(double distance, double speed) {
+        return run(() -> imDriver.setInputs(speed, speed));
+    }
+
+    @Override
+    public Command setSpeeds(double lspeed, double rspeed) {
+        
+    }
 }
