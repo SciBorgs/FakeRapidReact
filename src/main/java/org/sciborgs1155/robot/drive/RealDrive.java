@@ -40,10 +40,14 @@ public class RealDrive extends SubsystemBase implements DriveIO {
     double rightstart=rightEncoder.getPosition();
     return run(()->diffDrive.arcadeDrive(speed, 0))
     .until(()-> Math.max(leftEncoder.getPosition()-leftstart, rightEncoder.getPosition()-rightstart) >= distance)
-    .finallyDo(()-> diffDrive.stopMotor())
-    ;
+    .finallyDo(()-> diffDrive.stopMotor());
     //This code has no PID controller, controlled only with distance and speed. 
     //That means that if this robot was a fast moving car, it will drive onto the crosswalk and hit an unsuspecting pedistrian. 
+  }
+
+  @Override
+  public Command setSpeeds(double lspeed, double rspeed){
+    return run(()->diffDrive.tankDrive(lspeed, rspeed));
   }
 }
 
