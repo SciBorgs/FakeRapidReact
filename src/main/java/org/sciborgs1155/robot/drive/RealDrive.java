@@ -63,6 +63,8 @@ public class RealDrive implements DriveIO {
     pose = odometry.update(gyroAngle, leftEncoder.getPosition(), rightEncoder.getPosition());
   }
 
+  @Override public void close() throws Exception {leftLeader.close(); leftFollower.close(); rightLeader.close(); rightFollower.close();}
+  
 }
 
 

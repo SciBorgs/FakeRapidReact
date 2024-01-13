@@ -45,8 +45,7 @@ public class SimDrive implements DriveIO {
     public double getLVelocity() {
         return simDrive.getLeftVelocityMetersPerSecond();
     }
-    @Override
-    public void update() {
-        simDrive.update(Constants.PERIOD);
-    }
+    @Override public void update() {simDrive.update(Constants.PERIOD);}
+
+    @Override public void close() throws Exception {}
 }

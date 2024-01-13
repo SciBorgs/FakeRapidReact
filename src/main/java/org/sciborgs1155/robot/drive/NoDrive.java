@@ -16,5 +16,6 @@ public class NoDrive implements DriveIO {
     //do nothing? 
     //You are being asked to drive a certain distance when you can't move.
     //You are being asked to run when you can't move.
-
+    
+    @Override public void close() throws Exception {}
 }
