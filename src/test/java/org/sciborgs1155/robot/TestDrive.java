@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestDrive {
     Drive drive;
-    final double delta = 0.5;
+    final double delta = 1;
     
     @BeforeEach
     public void doBefore() {
@@ -19,11 +19,12 @@ public class TestDrive {
     }
 
     @ParameterizedTest
-    @ValueSource(doubles = {1})
+    @ValueSource(doubles = {1,2,3,4,5})
     public void testVelocity(double v) {
         run(drive.tank(() -> v, () -> v));
-        fastForward(2500);
-        assertEquals(drive.sumPositionError(), 0, delta);
+        fastForward(1000); // /tick warp??
+        assertEquals(v, drive.getLVelocity(), delta);
+        assertEquals(v, drive.getRVelocity(), delta);
     }
 
 }

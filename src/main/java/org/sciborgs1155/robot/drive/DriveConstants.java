@@ -7,9 +7,9 @@ import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.math.util.Units;
 
 public class DriveConstants {
-    static final int kp = 10;
-    static final int ki = 0;
-    static final int kd = 0;
+    static final double kp = 10;
+    static final double ki = 0;
+    static final double kd = 0;
     
     public static final double kSVolts = 0;
     public static final double kShooterFreeRPS = 0;

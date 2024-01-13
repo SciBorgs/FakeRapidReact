@@ -39,9 +39,9 @@ public class Drive extends SubsystemBase implements Logged {
   public boolean isAtGoal() {
     return lpid.atSetpoint() && rpid.atSetpoint();
   }
-  public double sumPositionError() {
-    return lpid.getPositionError()+rpid.getPositionError();
-  }
+  
+  public double getLVelocity(){return drive.getLVelocity();}
+  public double getRVelocity(){return drive.getRVelocity();}
   
   public Command tank(DoubleSupplier l, DoubleSupplier r) {
     return run(() -> 
