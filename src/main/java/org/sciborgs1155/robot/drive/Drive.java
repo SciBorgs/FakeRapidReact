@@ -31,7 +31,7 @@ public class Drive extends SubsystemBase implements Logged {
 
   public Command tank(DoubleSupplier l, DoubleSupplier r) {
     return run(() -> {
-      driver.setLVoltage(lpid.calculate(drive.getLVe));
+      driver.setLVoltage(lpid.calculate(drive.));
       driver.setRVoltage(r.getAsDouble());
     });
   }

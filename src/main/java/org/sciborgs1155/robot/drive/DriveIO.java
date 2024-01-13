@@ -8,6 +8,8 @@ public interface DriveIO {
     void setRVoltage(double voltage);
     double getLVoltage();
     double getRVoltage();
+    double getLVelocity();
+    double getRVelocity();
     double getLDistanceTraveled();
     double getRDistanceTraveled();
 }
