@@ -35,8 +35,12 @@ public class Drive extends SubsystemBase implements Logged {
     return Robot.isReal() ? new Drive(new RealDrive()) : new Drive(new SimDrive()); // see if you are real
   }
 
+  @LogBoth
   public boolean isAtGoal() {
     return lpid.atSetpoint() && rpid.atSetpoint();
+  }
+  public double sumPositionError() {
+    return lpid.getPositionError()+rpid.getPositionError();
   }
   
   public Command tank(DoubleSupplier l, DoubleSupplier r) {

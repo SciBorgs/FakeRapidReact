@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestDrive {
     Drive drive;
+    final double delta = 0.5;
     
     @BeforeEach
     public void doBefore() {
@@ -21,7 +22,8 @@ public class TestDrive {
     @ValueSource(doubles = {1})
     public void testVelocity(double v) {
         run(drive.tank(() -> v, () -> v));
-        fastForward();
-        assert(drive.isAtGoal());
+        fastForward(2500);
+        assertEquals(drive.sumPositionError(), 0, delta);
     }
+
 }
