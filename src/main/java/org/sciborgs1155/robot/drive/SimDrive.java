@@ -49,3 +49,7 @@ public class SimDrive implements DriveIO {
 
     @Override public void close() throws Exception {}
 }
+
+//some sim drive inspired by
+//https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/differential-drive-odometry.
+//and charlies code

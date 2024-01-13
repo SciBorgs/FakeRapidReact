@@ -70,7 +70,3 @@ public class RealDrive implements DriveIO {
 
 //First, inspires by https://github.com/wpilibsuite/allwpilib/blob/main/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/rapidreactcommandbot/subsystems/Drive.java
 //a bit less now...
-
-//some sim drive inspired by
-//https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/differential-drive-odometry.
-//and charlies code
