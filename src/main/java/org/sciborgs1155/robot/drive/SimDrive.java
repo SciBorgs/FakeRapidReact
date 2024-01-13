@@ -29,6 +29,38 @@ public class SimDrive implements DriveIO {
     }
 
 
+    @Override
+    public void setLVoltage(double voltage) {
+        
+    }
 
 
+    @Override
+    public void setRVoltage(double voltage) {
+        
+    }
+
+
+    @Override
+    public double getLDistanceTraveled() {
+        
+    }
+
+
+    @Override
+    public double getRDistanceTraveled() {
+        
+    }
+
+
+    @Override
+    public double getRVelocity() {
+        
+    }
+
+
+    @Override
+    public double getLVelocity() {
+        
+    }
 }

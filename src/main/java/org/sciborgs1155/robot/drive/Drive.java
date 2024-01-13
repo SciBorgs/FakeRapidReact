@@ -18,12 +18,9 @@ public class Drive extends SubsystemBase implements Logged {
   private final SimpleMotorFeedforward lfeedforward = new SimpleMotorFeedforward(DriveConstants.kSVolts, DriveConstants.kVVoltSecondsPerRotation);
   private final SimpleMotorFeedforward rfeedforward = new SimpleMotorFeedforward(DriveConstants.kSVolts, DriveConstants.kVVoltSecondsPerRotation);
 
-  private final DriveIO driver;
-  public Drive(DriveIO driverIO){
-    driver=driverIO;
-    setDefaultCommand(
-      run()//AAAAHHHHHHHHHHHHHHHHHHHH
-    );
+  private final DriveIO drive;
+  public Drive(DriveIO driverIO) {
+    drive = driverIO;
   }
   public static Drive create() {
     return Robot.isReal() ? new Drive(new RealDrive()) : new Drive(new SimDrive()); // see if you are real
@@ -31,8 +28,13 @@ public class Drive extends SubsystemBase implements Logged {
 
   public Command tank(DoubleSupplier l, DoubleSupplier r) {
     return run(() -> {
-      driver.setLVoltage(lpid.calculate(drive.));
-      driver.setRVoltage(r.getAsDouble());
+      drive.setLVoltage(
+        lpid.calculate(drive.getLVelocity(), l.getAsDouble())
+        + lfeedforward.calculate(l.getAsDouble()));
+      
+      drive.setRVoltage(
+        rpid.calculate(drive.getRVelocity(), r.getAsDouble())
+        + rfeedforward.calculate(r.getAsDouble()));
     });
   }
 }
