@@ -24,7 +24,7 @@ public class RealDrive implements DriveIO {
   private final RelativeEncoder rightEncoder= rightLeader.getEncoder();
 
   private final ADIS16448_IMU gyro = new ADIS16448_IMU();
-  private final DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(gyro.getAngle()), getLDistanceTraveled(), getRDistanceTraveled(), new Pose2d(5, 13.5, new Rotation2d()));
+  private final DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(gyro.getAngle()), leftEncoder.getPosition(), rightEncoder.getPosition(), new Pose2d(5, 13.5, new Rotation2d()));
   private Pose2d pose = new Pose2d();
 
   public RealDrive() {
@@ -49,16 +49,18 @@ public class RealDrive implements DriveIO {
   public Pose2d getPose() {
       return odometry.getPoseMeters();
   }
-  @Override public double getRVelocity() {
-    return rightEncoder.getVelocity();
-  }
+
   @Override public double getLVelocity() {
     return leftEncoder.getVelocity();
   }
+  @Override public double getRVelocity() {
+    return rightEncoder.getVelocity();
+  }
+  
   @Override
   public void update() {
     Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getGyroAngleX());
-    pose = odometry.update(gyroAngle, getLDistanceTraveled(), getRDistanceTraveled());
+    pose = odometry.update(gyroAngle, leftEncoder.getPosition(), rightEncoder.getPosition());
   }
 
 }
@@ -66,3 +68,7 @@ public class RealDrive implements DriveIO {
 
 //First, inspires by https://github.com/wpilibsuite/allwpilib/blob/main/wpilibjExamples/src/main/java/edu/wpi/first/wpilibj/examples/rapidreactcommandbot/subsystems/Drive.java
 //a bit less now...
+
+//some sim drive inspired by
+//https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/differential-drive-odometry.
+//and charlies code
