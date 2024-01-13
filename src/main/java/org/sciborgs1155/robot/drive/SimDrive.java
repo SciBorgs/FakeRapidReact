@@ -26,17 +26,9 @@ public class SimDrive implements DriveIO {
     }
 
     @Override
-    public void setLVoltage(double voltage) {
-        
+    public void setVoltages(double leftVoltage, double rightVoltage) {
+        simDrive.setInputs(leftVoltage,rightVoltage);
     }
-
-
-    @Override
-    public void setRVoltage(double voltage) {
-        
-    }
-
-
     @Override
     public double getLDistanceTraveled() {
         

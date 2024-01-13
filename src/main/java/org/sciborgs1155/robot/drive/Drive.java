@@ -27,14 +27,11 @@ public class Drive extends SubsystemBase implements Logged {
   }
 
   public Command tank(DoubleSupplier l, DoubleSupplier r) {
-    return run(() -> {
-      drive.setLVoltage(
+    return run(() -> 
+      drive.setVoltages(
         lpid.calculate(drive.getLVelocity(), l.getAsDouble())
-        + lfeedforward.calculate(l.getAsDouble()));
-      
-      drive.setRVoltage(
-        rpid.calculate(drive.getRVelocity(), r.getAsDouble())
-        + rfeedforward.calculate(r.getAsDouble()));
-    });
+        + lfeedforward.calculate(l.getAsDouble())
+        , rpid.calculate(drive.getRVelocity(), r.getAsDouble())
+        + rfeedforward.calculate(r.getAsDouble())));
+    }
   }
-}
