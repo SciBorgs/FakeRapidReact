@@ -45,11 +45,9 @@ public class RealDrive implements DriveIO {
     leftLeader.setVoltage(leftVoltage);
     rightLeader.setVoltage(rightVoltage);
   }
-  @Override public double getLDistanceTraveled() {
-    return leftEncoder.getPosition();
-  }
-  @Override public double getRDistanceTraveled() {
-    return rightEncoder.getPosition();
+  @Override
+  public Pose2d getPose() {
+      return odometry.getPoseMeters();
   }
   @Override public double getRVelocity() {
     return rightEncoder.getVelocity();

@@ -30,16 +30,9 @@ public class SimDrive implements DriveIO {
         simDrive.setInputs(leftVoltage,rightVoltage);
     }
     @Override
-    public double getLDistanceTraveled() {
-        
+    public Pose2d getPose() {
+        return simDrive.getPose();
     }
-
-
-    @Override
-    public double getRDistanceTraveled() {
-        
-    }
-
 
     @Override
     public double getRVelocity() {
