@@ -32,7 +32,8 @@ public class Drive extends SubsystemBase implements Logged {
         lpid.calculate(drive.getLVelocity(), l.getAsDouble())
         + lfeedforward.calculate(l.getAsDouble()));
       
-        drive.setRVoltage(rpid.calculate(drive.getRVelocity(), r.getAsDouble())
+      drive.setRVoltage(
+        rpid.calculate(drive.getRVelocity(), r.getAsDouble())
         + rfeedforward.calculate(r.getAsDouble()));
     });
   }
