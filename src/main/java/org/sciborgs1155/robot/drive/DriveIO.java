@@ -9,4 +9,5 @@ public interface DriveIO {
     double getRDistanceTraveled();
     double getRVelocity();
     double getLVelocity();
+    void update();
 }

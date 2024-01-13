@@ -2,6 +2,7 @@ package org.sciborgs1155.robot;
 
 import edu.wpi.first.wpilibj.DataLogManager;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.ProxyCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import java.util.List;
@@ -28,7 +29,7 @@ public class Robot extends CommandRobot implements Logged, Fallible {
   private final CommandXboxController driver = new CommandXboxController(OI.DRIVER);
 
   // SUBSYSTEMS
-  private final Drive robotdrive = Drive.create(); //creates a Drive robotdrive
+  private final Drive drive = Drive.create(); //creates a Drive robotdrive
 
   // COMMANDS
   @LogBoth Autos autos = new Autos();
@@ -61,7 +62,11 @@ public class Robot extends CommandRobot implements Logged, Fallible {
    * Configures subsystem default commands. Default commands are scheduled when no other command is
    * running on a subsystem.
    */
-  private void configureSubsystemDefaults() {}
+  private void configureSubsystemDefaults() {
+    drive.setDefaultCommand(
+        drive.tank(driver::getLeftX, driver::getRightX)
+      );
+  }
 
   /** Configures trigger -> command bindings */
   private void configureBindings() {

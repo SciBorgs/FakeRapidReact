@@ -5,6 +5,10 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.ADIS16448_IMU;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class RealDrive implements DriveIO {
@@ -18,6 +22,10 @@ public class RealDrive implements DriveIO {
   
   private final RelativeEncoder leftEncoder= leftLeader.getEncoder();
   private final RelativeEncoder rightEncoder= rightLeader.getEncoder();
+
+  private final ADIS16448_IMU gyro = new ADIS16448_IMU();
+  private final DifferentialDriveOdometry odometry = new DifferentialDriveOdometry(Rotation2d.fromDegrees(gyro.getAngle()), getLDistanceTraveled(), getRDistanceTraveled(), new Pose2d(5, 13.5, new Rotation2d()));
+  private Pose2d pose = new Pose2d();
 
   public RealDrive() {
     leftEncoder.setPositionConversionFactor(DriveConstants.kEncoderDistancePerPulse);
@@ -50,6 +58,11 @@ public class RealDrive implements DriveIO {
   }
   @Override public double getLVelocity() {
     return leftEncoder.getVelocity();
+  }
+  @Override
+  public void update() {
+    Rotation2d gyroAngle = Rotation2d.fromDegrees(gyro.getGyroAngleX());
+    pose = odometry.update(gyroAngle, getLDistanceTraveled(), getRDistanceTraveled());
   }
 
 }

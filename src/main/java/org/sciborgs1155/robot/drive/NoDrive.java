@@ -8,6 +8,7 @@ public class NoDrive implements DriveIO {
     @Override public double getRDistanceTraveled() {return 0.0;}
     @Override public double getRVelocity() {return 0;}
     @Override public double getLVelocity() {return 0;}
+    @Override public void update() {}
     
     //do nothing? 
     //You are being asked to drive a certain distance when you can't move.
