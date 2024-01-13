@@ -33,12 +33,24 @@ public class RealDrive implements DriveIO {
     rightFollower.follow(rightLeader, true);
   }
 
-  @Override public void setLVoltage(double voltage) {leftLeader.setVoltage(voltage);}
-  @Override public void setRVoltage(double voltage) {rightLeader.setVoltage(voltage);}
-  @Override public double getLVoltage() {return leftLeader.getBusVoltage();}
-  @Override public double getRVoltage() {return rightLeader.getBusVoltage();}
-  @Override public double getLDistanceTraveled() {return leftEncoder.getPosition();}
-  @Override public double getRDistanceTraveled() {return rightEncoder.getPosition();}
+  @Override public void setLVoltage(double voltage) {
+    leftLeader.setVoltage(voltage);
+  }
+  @Override public void setRVoltage(double voltage) {
+    rightLeader.setVoltage(voltage);
+  }
+  @Override public double getLDistanceTraveled() {
+    return leftEncoder.getPosition();
+  }
+  @Override public double getRDistanceTraveled() {
+    return rightEncoder.getPosition();
+  }
+  @Override public double getRVelocity() {
+    return rightEncoder.getVelocity();
+  }
+  @Override public double getLVelocity() {
+    return leftEncoder.getVelocity();
+  }
 
 }
 
