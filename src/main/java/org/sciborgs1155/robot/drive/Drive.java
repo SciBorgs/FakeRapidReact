@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import monologue.Logged;
 import monologue.Monologue.LogBoth;
+import monologue.Monologue.LogFile;
 
 public class Drive extends SubsystemBase implements Logged {
   @LogBoth
@@ -27,21 +28,15 @@ public class Drive extends SubsystemBase implements Logged {
   @LogBoth
   private final Field2d field = new Field2d();
 
-  private final DriveIO drive;
-  public Drive(DriveIO driverIO) {
-    drive = driverIO;
-  }
-  public static Drive create() {
-    return Robot.isReal() ? new Drive(new RealDrive()) : new Drive(new SimDrive()); // see if you are real
-  }
+  @LogFile private final DriveIO drive = Robot.isReal() ? new RealDrive() : new SimDrive();
 
   @LogBoth
   public boolean isAtGoal() {
     return lpid.atSetpoint() && rpid.atSetpoint();
   }
   
-  public double getLVelocity(){return drive.getLVelocity();}
-  public double getRVelocity(){return drive.getRVelocity();}
+  @LogBoth public double getLVelocity(){return drive.getLVelocity();}
+  @LogBoth public double getRVelocity(){return drive.getRVelocity();}
   
   public Command tank(DoubleSupplier l, DoubleSupplier r) {
     return run(() -> 
@@ -56,8 +51,5 @@ public class Drive extends SubsystemBase implements Logged {
     public void periodic() {
       drive.update(); 
       field.setRobotPose(drive.getPose());
-      SmartDashboard.putNumber("L V", drive.getLVelocity());
-      SmartDashboard.putNumber("R V", drive.getRVelocity());
     }
-
   }
