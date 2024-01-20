@@ -1,17 +1,12 @@
 package org.sciborgs1155.robot.shooter;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.RelativeEncoder;
-import com.revrobotics.CANSparkBase.IdleMode;
-import com.revrobotics.CANSparkLowLevel.MotorType;
-
-import edu.wpi.first.math.spline.CubicHermiteSpline;
-
 import static org.sciborgs1155.robot.shooter.ShooterConstants.*;
 
+import com.revrobotics.CANSparkBase.IdleMode;
+import com.revrobotics.CANSparkLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.RelativeEncoder;
 import java.util.Set;
-
 import org.sciborgs1155.lib.FaultLogger;
 import org.sciborgs1155.lib.SparkUtils;
 import org.sciborgs1155.lib.SparkUtils.Data;
@@ -29,10 +24,14 @@ public class RealFlywheel implements FlywheelIO {
     encoder.setPositionConversionFactor(POSITION_FACTOR);
     encoder.setVelocityConversionFactor(VELOCITY_FACTOR);
 
-    SparkUtils.configureFrameStrategy(motor, Set.of(Data.POSITION, Data.VELOCITY, Data.VOLTAGE), Set.of(Sensor.DUTY_CYCLE), false);
+    SparkUtils.configureFrameStrategy(
+        motor,
+        Set.of(Data.POSITION, Data.VELOCITY, Data.VOLTAGE),
+        Set.of(Sensor.DUTY_CYCLE),
+        false);
 
     FaultLogger.register(motor);
-    
+
     motor.burnFlash();
 
     encoder.setPosition(0);
@@ -51,8 +50,9 @@ public class RealFlywheel implements FlywheelIO {
   public double getMotorAppliedOutput() {
     return motor.getAppliedOutput();
   }
+
   @Override
   public void close() throws Exception {
-      motor.close();
+    motor.close();
   }
 }

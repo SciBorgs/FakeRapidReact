@@ -1,8 +1,9 @@
 package org.sciborgs1155.robot.Intake;
 
+import static org.sciborgs1155.robot.Constants.*;
+
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
-import static org.sciborgs1155.robot.Constants.*;
 
 public class SimIntake implements IntakeIO {
   DCMotorSim motor;

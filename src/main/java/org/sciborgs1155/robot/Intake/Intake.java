@@ -33,9 +33,10 @@ public class Intake extends SubsystemBase implements Logged {
 
   public Command intake() {
     return runOnce(
-        () -> {
-          pid.setSetpoint(INTAKE_ANGULAR_SPEED);
-        }).andThen(Commands.idle());
+            () -> {
+              pid.setSetpoint(INTAKE_ANGULAR_SPEED);
+            })
+        .andThen(Commands.idle());
   }
 
   public Command stop() {
@@ -47,8 +48,9 @@ public class Intake extends SubsystemBase implements Logged {
 
   public Command outtake() {
     return runOnce(
-        () -> {
-          pid.setSetpoint(-INTAKE_ANGULAR_SPEED);
-        }).andThen(Commands.idle());
+            () -> {
+              pid.setSetpoint(-INTAKE_ANGULAR_SPEED);
+            })
+        .andThen(Commands.idle());
   }
 }
