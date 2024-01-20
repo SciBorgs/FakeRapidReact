@@ -6,14 +6,15 @@ import org.sciborgs1155.robot.Constants;
 
 public class SimDrive implements DriveIO {
 
-  DifferentialDrivetrainSim sim = new DifferentialDrivetrainSim(
-    DriveConstants.DRIVEMOTOR,
-    DriveConstants.GEARING,
-    DriveConstants.JKGMETERSSQUARED,
-    DriveConstants.MASSKG,
-    DriveConstants.WHEELRADIUSMETERS,
-    DriveConstants.TRACKWIDTHMETERS,
-    DriveConstants.MEASUREMENTSSTDDEVS);
+  DifferentialDrivetrainSim sim =
+      new DifferentialDrivetrainSim(
+          DriveConstants.DRIVEMOTOR,
+          DriveConstants.GEARING,
+          DriveConstants.JKGMETERSSQUARED,
+          DriveConstants.MASSKG,
+          DriveConstants.WHEELRADIUSMETERS,
+          DriveConstants.TRACKWIDTHMETERS,
+          DriveConstants.MEASUREMENTSSTDDEVS);
 
   public SimDrive() {
     sim.setPose(DriveConstants.STARTINGPOSE);
