@@ -83,10 +83,9 @@ public class Robot extends CommandRobot implements Logged {
     operator
         .a()
         .whileTrue(
-            shooter
-                .shoot()
-                .alongWith(
-                    Commands.waitUntil(shooter::isAtShootingSpeed).andThen(hopper.forward())));
+            Commands.parallel(
+                shooter.shoot(),
+                Commands.waitUntil(shooter::isAtShootingSpeed).andThen(hopper.forward())));
     operator.b().whileTrue(intake.outtake());
     autonomous().whileTrue(new ProxyCommand(autos::get));
     FaultLogger.onFailing(f -> Commands.print(f.toString()));
