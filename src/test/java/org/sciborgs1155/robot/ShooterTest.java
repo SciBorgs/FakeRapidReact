@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.sciborgs1155.robot.shooter.Shooter;
 import org.sciborgs1155.robot.shooter.ShooterConstants;
 
-public class TestShooter {
+public class ShooterTest {
   Shooter shooter;
   double DELTA = 5e-1;
 
@@ -23,7 +23,6 @@ public class TestShooter {
   @Test
   public void testVelocity() {
     run(shooter.shoot());
-    shooter.periodic();
     fastForward();
     assertEquals(ShooterConstants.CONSTANT_TARGET_RPS, shooter.getVelocity(), DELTA);
   }
